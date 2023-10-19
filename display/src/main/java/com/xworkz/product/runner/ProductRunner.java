@@ -92,7 +92,7 @@ public class ProductRunner {
 			}
 			
 		System.out.println("*** Get all ProductDTO sorted by quantity in desc order ***");
-		Optional<ProductDTO> quantity = collection.stream().sorted().filter(p -> p.getQuantity()==4.0)
+		Optional<ProductDTO> quantity = collection.stream().sorted((a1,a2)->Double.compare(a2.getQuantity(), a1.getQuantity())).filter(p -> p.getQuantity()==4.0)
 				.collect(Collectors.toList()).
 				stream().max((a1, a2) -> a2.compareTo(a1));
 		if (quantity.isPresent()) {
@@ -101,7 +101,7 @@ public class ProductRunner {
 		}
 		
 		System.out.println("*** Get all AddressDTO by product name sort by id desc order ***");
-		Optional<ProductDTO> name = collection.stream().sorted().filter(p -> p.getName().equals("Fan"))
+		Optional<ProductDTO> name = collection.stream().sorted((a1,a2)->Integer.compare(a2.getId(), a1.getId())).filter(p -> p.getName().equals("Fan"))
 				.collect(Collectors.toList()).
 				stream().max((a1, a2) -> a2.compareTo(a1));
 		if (name.isPresent()) {
